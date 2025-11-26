@@ -91,7 +91,6 @@ Each document in the output JSONL file follows this schema:
 
 ```json
 {
-  "doc_id": "md5_hash_of_url",
   "url": "https://example.com/page",
   "title": "Page Title",
   "body_text": "Main content text, cleaned and normalized...",
@@ -103,13 +102,13 @@ Each document in the output JSONL file follows this schema:
   "reading_time_minutes": 2,
   "has_code": false,
   "is_substantial": true,
-  "is_long_form": false
+  "is_long_form": false,
+  "doc_id": "md5_hash_of_url"
 }
 ```
 
 ### Field Descriptions
 
-- **`doc_id`**: Unique document identifier (MD5 hash of URL) for deduplication
 - **`url`**: Source URL of the document
 - **`title`**: Document title (extracted from HTML `<title>`, Open Graph, or `<h1>`)
 - **`body_text`**: Main content text, cleaned of HTML, boilerplate, and normalized whitespace
@@ -122,6 +121,7 @@ Each document in the output JSONL file follows this schema:
 - **`has_code`**: Boolean indicating if content contains code snippets
 - **`is_substantial`**: Boolean indicating if document has ≥100 words
 - **`is_long_form`**: Boolean indicating if document has ≥1000 words
+- **`doc_id`**: Unique document identifier (MD5 hash of URL) for deduplication
 
 A complete JSON Schema is provided in `schema.json`.
 
