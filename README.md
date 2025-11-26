@@ -19,7 +19,7 @@ The scraper respects `robots.txt` and includes sensible throttling to be a good 
 1. **Clone or download this repository**
 
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/kmakumb/AISiteScraper.git
    cd AISiteScraper
    ```
 
