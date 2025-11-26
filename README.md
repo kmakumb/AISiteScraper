@@ -16,14 +16,7 @@ The scraper respects `robots.txt` and includes sensible throttling to be a good 
 
 ### Installation
 
-1. **Clone or download this repository**
-
-   ```bash
-   git clone https://github.com/kmakumb/AISiteScraper.git
-   cd AISiteScraper
-   ```
-
-2. **Install dependencies:**
+1. **Install dependencies:**
 
    ```bash
    pip install -r requirements.txt
