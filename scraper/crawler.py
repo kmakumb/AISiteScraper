@@ -83,14 +83,19 @@ class Crawler:
     
     def _normalize_url(self, url: str) -> str:
         """
-        Normalize URL by removing trailing slashes from path.
+        Normalize URL by removing trailing slashes and index files from path.
         
-        This ensures https://example.com and https://example.com/ are treated as the same.
+        This ensures:
+        - https://example.com and https://example.com/ are treated as the same
+        - https://example.com and https://example.com/index.html are treated as the same
         """
         parsed = urlparse(url)
-        # Remove trailing slash from path (including root path)
+        # Remove trailing slash from path
         path = parsed.path.rstrip('/')
-        # Reconstruct URL (empty path means no trailing slash)
+        # Remove index.html/index.htm from path (treat as root)
+        if path.lower() in ('/index.html', '/index.htm', 'index.html', 'index.htm'):
+            path = ''
+        # Reconstruct URL (empty path means root)
         normalized = f"{parsed.scheme}://{parsed.netloc}{path}"
         if parsed.query:
             normalized += f"?{parsed.query}"
