@@ -6,9 +6,35 @@ A production-minded web scraping pipeline that crawls a public site, extracts an
 
 This scraper is designed to crawl a single public website. For this project, I chose:
 
-**quotes.toscrape.com** - A simple quotes website designed for scraping practice. This site explicitly allows scraping and provides a good sandbox for testing the pipeline.
+**quotes.toscrape.com** - A simple quotes website designed for scraping practice.
 
-The scraper respects `robots.txt` and includes sensible throttling to be a good web citizen.
+### Why This Site?
+
+I selected quotes.toscrape.com for several reasons:
+
+- **Explicitly allows scraping**: The site is specifically designed for web scraping practice and explicitly permits automated access, making it an ethical choice for this project.
+
+- **Good test coverage**: The site contains a variety of page types (homepage, author pages, tag pages, pagination) that allow testing different aspects of the crawler:
+
+  - Internal link following
+  - Pagination handling
+  - Content extraction from different page structures
+  - URL normalization (handles trailing slashes, index.html variations)
+
+- **Reasonable size**: The site is large enough to demonstrate crawling depth and breadth limits, but small enough to complete test runs quickly.
+
+- **Clean structure**: The HTML structure is relatively clean, making it a good test case for content extraction algorithms while still presenting realistic challenges (navigation, footers, etc.).
+
+- **Educational value**: As a sandbox site, it's perfect for demonstrating production-minded scraping practices without impacting real websites.
+
+### Ethical Considerations
+
+The scraper respects `robots.txt` and includes sensible throttling (1 second delay between requests by default) to be a good web citizen. When scraping other sites, always:
+
+- Check and respect robots.txt
+- Use appropriate delays between requests
+- Follow the site's terms of service
+- Only scrape publicly accessible content
 
 ## Quick Start
 
