@@ -81,8 +81,28 @@ class Crawler:
             logger.debug(f"Could not fetch robots.txt: {e}")
             self.robots_allowed = True
     
+    def _normalize_url(self, url: str) -> str:
+        """
+        Normalize URL by removing trailing slashes from path.
+        
+        This ensures https://example.com and https://example.com/ are treated as the same.
+        """
+        parsed = urlparse(url)
+        # Remove trailing slash from path (including root path)
+        path = parsed.path.rstrip('/')
+        # Reconstruct URL (empty path means no trailing slash)
+        normalized = f"{parsed.scheme}://{parsed.netloc}{path}"
+        if parsed.query:
+            normalized += f"?{parsed.query}"
+        if parsed.fragment:
+            normalized += f"#{parsed.fragment}"
+        return normalized
+    
     def _is_valid_url(self, url: str, depth: int) -> bool:
         """Check if URL should be crawled."""
+        # Normalize URL first
+        url = self._normalize_url(url)
+        
         # Skip if already visited
         if url in self.visited_urls:
             return False
@@ -177,6 +197,8 @@ class Crawler:
                 absolute_url = urljoin(base_url, href)
                 # Remove fragment
                 absolute_url = absolute_url.split("#")[0]
+                # Normalize URL (remove trailing slash)
+                absolute_url = self._normalize_url(absolute_url)
                 links.append(absolute_url)
             
             return links
@@ -194,11 +216,17 @@ class Crawler:
         logger.info(f"Starting crawl from {self.start_url}")
         logger.info(f"Max pages: {self.max_pages}, Max depth: {self.max_depth}")
         
+        # Normalize start URL
+        normalized_start = self._normalize_url(self.start_url)
+        
         # Initialize crawl queue
-        self.to_crawl = [(self.start_url, 0)]
+        self.to_crawl = [(normalized_start, 0)]
         
         while self.to_crawl and len(self.crawled_pages) < self.max_pages:
             url, depth = self.to_crawl.pop(0)
+            
+            # Normalize URL
+            url = self._normalize_url(url)
             
             # Skip if already visited
             if url in self.visited_urls:
