@@ -18,21 +18,49 @@ The scraper respects `robots.txt` and includes sensible throttling to be a good 
 
 1. **Clone or download this repository**
 
+   ```bash
+   git clone <repository-url>
+   cd AISiteScraper
+   ```
+
 2. **Install dependencies:**
+
    ```bash
    pip install -r requirements.txt
    ```
 
+   **Optional:** Install as a package to use `scrape_site` command from anywhere:
+
+   ```bash
+   pip install -e .
+   ```
+
 ### Basic Usage
+
+**From the project root directory**, run:
 
 ```bash
 python scrape_site.py --start-url=https://quotes.toscrape.com --max-pages=50
 ```
 
+**Or if installed as a package**, you can run from anywhere:
+
+```bash
+scrape_site --start-url=https://quotes.toscrape.com --max-pages=50
+```
+
 ### Full Command Reference
+
+**Run from project root directory:**
 
 ```bash
 python scrape_site.py --start-url=<URL> [OPTIONS]
+```
+
+**Or if installed as package:**
+
+```bash
+scrape_site --start-url=<URL> [OPTIONS]
 ```
 
 **Required Arguments:**
