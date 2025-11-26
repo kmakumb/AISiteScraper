@@ -102,31 +102,24 @@ Each document in the output JSONL file follows this schema:
   "url": "https://example.com/page",
   "title": "Page Title",
   "body_text": "Main content text, cleaned and normalized...",
-  "metadata": {
-    "fetched_at": "2024-01-15T10:30:00+00:00",
-    "language": "en",
-    "content_type": "article",
-    "word_count": 450,
-    "char_count": 2800,
-    "reading_time_minutes": 2,
-    "has_code": false,
-    "is_substantial": true,
-    "is_long_form": false
-  }
+  "fetched_at": "2024-01-15T10:30:00+00:00",
+  "language": "en",
+  "content_type": "article",
+  "word_count": 450,
+  "char_count": 2800,
+  "reading_time_minutes": 2,
+  "has_code": false,
+  "is_substantial": true,
+  "is_long_form": false
 }
 ```
 
 ### Field Descriptions
 
-#### Top-level Fields
-
 - **`doc_id`**: Unique document identifier (MD5 hash of URL) for deduplication
 - **`url`**: Source URL of the document
 - **`title`**: Document title (extracted from HTML `<title>`, Open Graph, or `<h1>`)
 - **`body_text`**: Main content text, cleaned of HTML, boilerplate, and normalized whitespace
-
-#### Metadata Fields
-
 - **`fetched_at`**: ISO 8601 timestamp when document was fetched
 - **`language`**: Detected language code (`en`, `es`, `fr`, `de` - simple heuristic)
 - **`content_type`**: Type of page (`article`, `doc_page`, `product_page`, `homepage`, `page`)

@@ -3,7 +3,21 @@
   "title": "AI Document Schema",
   "description": "Schema for AI-ready documents produced by AISiteScraper",
   "type": "object",
-  "required": ["doc_id", "url", "title", "body_text", "metadata"],
+  "required": [
+    "doc_id",
+    "url",
+    "title",
+    "body_text",
+    "fetched_at",
+    "language",
+    "content_type",
+    "word_count",
+    "char_count",
+    "reading_time_minutes",
+    "has_code",
+    "is_substantial",
+    "is_long_form"
+  ],
   "properties": {
     "doc_id": {
       "type": "string",
@@ -22,63 +36,47 @@
       "type": "string",
       "description": "Main content text (cleaned, without HTML)"
     },
-    "metadata": {
-      "type": "object",
-      "required": [
-        "fetched_at",
-        "language",
-        "content_type",
-        "word_count",
-        "char_count",
-        "reading_time_minutes",
-        "has_code",
-        "is_substantial",
-        "is_long_form"
-      ],
-      "properties": {
-        "fetched_at": {
-          "type": "string",
-          "format": "date-time",
-          "description": "ISO 8601 timestamp when document was fetched"
-        },
-        "language": {
-          "type": "string",
-          "enum": ["en", "es", "fr", "de"],
-          "description": "Detected language code (simple heuristic)"
-        },
-        "content_type": {
-          "type": "string",
-          "enum": ["article", "doc_page", "product_page", "homepage", "page"],
-          "description": "Type of content page"
-        },
-        "word_count": {
-          "type": "integer",
-          "minimum": 0,
-          "description": "Number of words in body_text"
-        },
-        "char_count": {
-          "type": "integer",
-          "minimum": 0,
-          "description": "Number of characters in body_text"
-        },
-        "reading_time_minutes": {
-          "type": "integer",
-          "minimum": 1,
-          "description": "Estimated reading time in minutes (200 words/min)"
-        },
-        "has_code": {
-          "type": "boolean",
-          "description": "Whether content appears to contain code snippets"
-        },
-        "is_substantial": {
-          "type": "boolean",
-          "description": "Whether document has at least 100 words"
-        },
-        "is_long_form": {
-          "type": "boolean",
-          "description": "Whether document has at least 1000 words"
-        }
-      }
+    "fetched_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when document was fetched"
+    },
+    "language": {
+      "type": "string",
+      "enum": ["en", "es", "fr", "de"],
+      "description": "Detected language code (simple heuristic)"
+    },
+    "content_type": {
+      "type": "string",
+      "enum": ["article", "doc_page", "product_page", "homepage", "page"],
+      "description": "Type of content page"
+    },
+    "word_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of words in body_text"
+    },
+    "char_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of characters in body_text"
+    },
+    "reading_time_minutes": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Estimated reading time in minutes (200 words/min)"
+    },
+    "has_code": {
+      "type": "boolean",
+      "description": "Whether content appears to contain code snippets"
+    },
+    "is_substantial": {
+      "type": "boolean",
+      "description": "Whether document has at least 100 words"
+    },
+    "is_long_form": {
+      "type": "boolean",
+      "description": "Whether document has at least 1000 words"
     }
   }
 }

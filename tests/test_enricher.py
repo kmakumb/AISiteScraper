@@ -23,16 +23,15 @@ class TestContentEnricher(unittest.TestCase):
         self.assertEqual(result["url"], url)
         self.assertEqual(result["title"], title)
         self.assertEqual(result["body_text"], body_text)
-        self.assertIn("metadata", result)
         
-        metadata = result["metadata"]
-        self.assertIn("word_count", metadata)
-        self.assertIn("char_count", metadata)
-        self.assertIn("language", metadata)
-        self.assertIn("content_type", metadata)
-        self.assertIn("fetched_at", metadata)
-        self.assertGreater(metadata["word_count"], 0)
-        self.assertGreater(metadata["char_count"], 0)
+        # Check that all fields are at top level (no nested metadata)
+        self.assertIn("word_count", result)
+        self.assertIn("char_count", result)
+        self.assertIn("language", result)
+        self.assertIn("content_type", result)
+        self.assertIn("fetched_at", result)
+        self.assertGreater(result["word_count"], 0)
+        self.assertGreater(result["char_count"], 0)
     
     def test_detect_content_type(self):
         """Test content type detection."""
@@ -76,12 +75,12 @@ class TestContentEnricher(unittest.TestCase):
         # Long content
         long_text = "Word " * 150  # 150 words
         result = self.enricher.enrich("https://example.com", "Title", long_text)
-        self.assertTrue(result["metadata"]["is_substantial"])
+        self.assertTrue(result["is_substantial"])
         
         # Short content
         short_text = "Word " * 10  # 10 words
         result = self.enricher.enrich("https://example.com", "Title", short_text)
-        self.assertFalse(result["metadata"]["is_substantial"])
+        self.assertFalse(result["is_substantial"])
 
 
 if __name__ == "__main__":

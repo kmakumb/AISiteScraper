@@ -184,7 +184,7 @@ class ScrapingPipeline:
         self._write_jsonl(enriched_docs, append=append_mode)
         
         # Generate summary
-        total_word_count = sum(doc["metadata"]["word_count"] for doc in enriched_docs)
+        total_word_count = sum(doc["word_count"] for doc in enriched_docs)
         avg_word_count = total_word_count / len(enriched_docs) if enriched_docs else 0
         
         summary = {

@@ -161,22 +161,20 @@ class ContentEnricher:
         is_substantial = word_count >= 100
         is_long_form = word_count >= 1000
         
-        # Build enriched document
+        # Build enriched document (flat structure, no nested metadata)
         enriched = {
             "url": url,
             "title": title,
             "body_text": body_text,
-            "metadata": {
-                "fetched_at": fetched_at.isoformat(),
-                "language": language,
-                "content_type": content_type,
-                "word_count": word_count,
-                "char_count": char_count,
-                "reading_time_minutes": reading_time_minutes,
-                "has_code": has_code,
-                "is_substantial": is_substantial,
-                "is_long_form": is_long_form,
-            }
+            "fetched_at": fetched_at.isoformat(),
+            "language": language,
+            "content_type": content_type,
+            "word_count": word_count,
+            "char_count": char_count,
+            "reading_time_minutes": reading_time_minutes,
+            "has_code": has_code,
+            "is_substantial": is_substantial,
+            "is_long_form": is_long_form,
         }
         
         return enriched
