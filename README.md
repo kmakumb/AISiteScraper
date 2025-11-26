@@ -4,11 +4,9 @@ A production-minded web scraping pipeline that crawls a public site, extracts an
 
 ## Site Chosen
 
-This scraper is designed to work with any public website that allows scraping. For demonstration purposes, I recommend using:
+This scraper is designed to crawl a single public website. For this project, I chose:
 
-- **quotes.toscrape.com** - A simple quotes website designed for scraping practice
-- **books.toscrape.com** - A book catalog site for scraping practice
-- **Documentation sites** - Any public documentation site (e.g., docs.python.org)
+**quotes.toscrape.com** - A simple quotes website designed for scraping practice. This site explicitly allows scraping and provides a good sandbox for testing the pipeline.
 
 The scraper respects `robots.txt` and includes sensible throttling to be a good web citizen.
 
@@ -47,13 +45,13 @@ scrape_site --start-url=https://quotes.toscrape.com --max-pages=50
 **Run from project root directory:**
 
 ```bash
-python scrape_site.py --start-url=<URL> [OPTIONS]
+python scrape_site.py --start-url=https://quotes.toscrape.com --max-pages=50 --max-depth=3
 ```
 
 **Or if installed as package:**
 
 ```bash
-scrape_site --start-url=<URL> [OPTIONS]
+scrape_site --start-url=https://quotes.toscrape.com --max-pages=50 --max-depth=3
 ```
 
 **Required Arguments:**
@@ -76,10 +74,10 @@ scrape_site --start-url=<URL> [OPTIONS]
 python scrape_site.py --start-url=https://quotes.toscrape.com
 
 # Scrape with custom limits and output file
-python scrape_site.py --start-url=https://books.toscrape.com --max-pages=200 --output=books.jsonl
+python scrape_site.py --start-url=https://quotes.toscrape.com --max-pages=200 --output=quotes.jsonl
 
-# Scrape documentation site with higher depth
-python scrape_site.py --start-url=https://docs.example.com --max-depth=3 --delay=2.0
+# Scrape with higher depth and slower rate
+python scrape_site.py --start-url=https://quotes.toscrape.com --max-depth=3 --delay=2.0
 
 # Verbose mode for debugging
 python scrape_site.py --start-url=https://quotes.toscrape.com --verbose
